@@ -277,4 +277,3 @@ export const updatePassword=AsyncHandeller(async(req,res,next)=>{
     const user=await UserCollection.findOneAndUpdate({email},{password:hash,reset},{new:true})
     return res.status(200).json({message:"success",user})
 })
-
