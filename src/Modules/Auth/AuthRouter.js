@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as Controller from './Controller/auth.js'
-import { Validation_Middleware } from "../../middleware/Validtions.js";
+import { Validation_Middleware } from "../../Middleware/Validtions.js";
 import { signup,signin, confiremEmail,email,code,password } from "./AuthValidation.js";
 
 export const AuthRouter=Router()
