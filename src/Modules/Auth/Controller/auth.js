@@ -258,8 +258,6 @@ export const SendEmail=AsyncHandeller(async(req,res,next)=>{
     )
     return res.status(200).json({message:"success",alert:"check your email",token})
 })
-
-
 // // checkCode
 export const CheckCode=AsyncHandeller(async(req,res,next)=>{
     const {token}=req.params
@@ -281,3 +279,4 @@ export const updatePassword=AsyncHandeller(async(req,res,next)=>{
     const user=await UserCollection.findOneAndUpdate({email},{password:hash,reset},{new:true})
     return res.status(200).json({message:"success",user})
 })
+
