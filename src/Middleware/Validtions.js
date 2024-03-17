@@ -26,6 +26,7 @@ export const generalFields = {
   cpassword: joi.string().valid(joi.ref("password")).messages({
     'any.only': 'Confirm password must match the password field.',
 }),
+  age: joi.number().min(15).max(100).required(),
   id: joi.string().custom(validateObjectId).required(),
   file: joi.object({
     size: joi.number().positive().required(),
