@@ -1,5 +1,5 @@
 import joi from 'joi';
-import { generalFields } from '../../middleware/Validtions.js';
+import { generalFields } from '../../Middleware/Validtions.js';
 
 export const signup=joi.object({
     email:generalFields.email,

@@ -2,9 +2,7 @@ import { Router } from "express";
 import * as Controller from './Controller/auth.js'
 import { Validation_Middleware } from "../../Middleware/Validtions.js";
 import { signup,signin, confiremEmail,email,code,password } from "./AuthValidation.js";
-
 export const AuthRouter=Router()
-
 AuthRouter.post('/signup',Validation_Middleware(signup),Controller.SignUp)
 AuthRouter.get('/verify/:token',Validation_Middleware(confiremEmail),Controller.ConfiremEmail)
 AuthRouter.post('/signin',Validation_Middleware(signin),Controller.SignIn)
