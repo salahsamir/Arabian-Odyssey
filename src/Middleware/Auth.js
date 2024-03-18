@@ -18,8 +18,9 @@ export const AuthMiddleware=(Role)=>{
        if(!user){
         return next(new Error(' this account not exist',{cause:404}))
        }
+    //    console.log(user.reset>iat);
     if(user.reset>iat){
-        return next(new Error('token not valid',{cause:404}))
+        return next(new Error('token not valid,please Login',{cause:404}))
     } 
    
        if(!Role.includes(user.Role)){

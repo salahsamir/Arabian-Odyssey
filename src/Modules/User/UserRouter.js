@@ -4,7 +4,7 @@ import { Router } from "express";
 
 import { AuthMiddleware, Roles } from "../../Middleware/Auth.js";
 import { UploadImage } from "../../Utils/Multer.js";
-import { ValidationMiddleware } from "../../middleware/Validtions.js";
+import { ValidationMiddleware } from "../../Middleware/Validtions.js";
 
 export const userRouter=Router()
 

@@ -53,6 +53,7 @@ export const Logout=AsyncHandeller(
     async(req,res,next)=>{
         const user=req.user
         user.status="Offline"
+        user.reset=Date.now()/1000
         await user.save()
         return res.status(200).json({message:"success"})
 
