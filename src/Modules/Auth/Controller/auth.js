@@ -146,10 +146,9 @@ export const SignIn = AsyncHandeller(async (req, res, next) => {
   if (!Compare({ value:password, hash: user.password })) {
     return next(new Error("password not match ", { cause: 404 }));
   }
-  const token = GenerateToken({ email, Role: user.Role, id: user._id });
   user.status = "Online";
   user.isDeleted = false;
-  console.log(user);
+  const token = GenerateToken({ email, Role: user.Role, id: user._id });
   return res.status(200).json({ message: "success", token });
 });
 // ////check email and send code  for forget password
