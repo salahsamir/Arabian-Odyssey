@@ -148,6 +148,7 @@ export const SignIn = AsyncHandeller(async (req, res, next) => {
   }
   user.status = "Online";
   user.isDeleted = false;
+  console.log(user);
   const token = GenerateToken({ email, Role: user.Role, id: user._id });
   return res.status(200).json({ message: "success", token });
 });
