@@ -1,13 +1,16 @@
 import { Router } from "express";
-import { Auth, Roles } from "../../middleware/Auth.js";
-import * as usercotroller from './Controller/user.js'
+ import * as Controller from"./Controller/user.js"
+import { AuthMiddleware, Roles } from "../../Middleware/Auth.js";
 import { UploadImage } from "../../Utils/Multer.js";
-import { Validation_Middleware } from "../../middleware/Validtions.js";
-import { UpdatePassword } from "./userValadition.js";
+
 export const userRouter=Router()
 
+//Route
+userRouter.route('/')
+         .get(AuthMiddleware(Roles.user),Controller.GetUser)
 
-userRouter.get('/',Auth(Roles.user),usercotroller.getUser)
-userRouter.patch('/image',Auth(Roles.user),UploadImage().single('image'),usercotroller.UpdateImage)
-userRouter.patch('/password',Auth(Roles.user),Validation_Middleware(UpdatePassword),usercotroller.UpdatePassword)
-userRouter.put('/',Auth(Roles.user),usercotroller.UpdateUser)
+
+userRouter.patch('/image',AuthMiddleware(Roles.user),UploadImage().single('image'),Controller.UploadImage)
+// userRouter.patch('/image',Auth(Roles.user),UploadImage().single('image'),usercotroller.UpdateImage)
+// userRouter.patch('/password',Auth(Roles.user),Validation_Middleware(UpdatePassword),usercotroller.UpdatePassword)
+// userRouter.put('/',Auth(Roles.user),usercotroller.UpdateUser)
