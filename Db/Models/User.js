@@ -32,8 +32,8 @@ const schema=new Schema({
     phone:{type:String},
     status:{
         type:String,
-        enum:['active','inactive'],
-        default:'active'
+        enum:['Online','Offline'],
+        default:'Online'
     },
     isConfiremed:{
         type:Boolean,

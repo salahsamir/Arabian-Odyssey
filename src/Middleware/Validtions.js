@@ -40,7 +40,7 @@ export const generalFields = {
   }),
 };
 
-export const Validation_Middleware = (schema) => {
+export const ValidationMiddleware = (schema) => {
   return (req, res, next) => {
     const inputs = { ...req.query, ...req.params, ...req.body };
     if (req.file || req.files) {

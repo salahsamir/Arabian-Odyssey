@@ -4,7 +4,7 @@ import { generalFields } from '../../middleware/Validtions.js'
 
 export const UpdatePassword = joi.object({
 
-    oldPassword: generalFields.password,
+    oldpassword: generalFields.password,
     password: generalFields.password,
-    cPassword: generalFields.cpassword
+    cpassword: generalFields.cpassword
 })

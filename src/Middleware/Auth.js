@@ -14,7 +14,7 @@ export const AuthMiddleware=(Role)=>{
         }
        const auth=token.split(process.env.Bearer)[1]
        const {id,iat}=VerifyToken(auth)
-       const user=await UserCollection.findById(id)
+       const user=await UserCollection.findOne({_id:id,isDeleted:false})
        if(!user){
         return next(new Error(' this account not exist',{cause:404}))
        }
