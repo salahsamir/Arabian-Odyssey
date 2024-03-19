@@ -6,6 +6,8 @@ import { AuthRouter } from "./Modules/Auth/AuthRouter.js";
 import { userRouter } from "./Modules/User/UserRouter.js";
 import { CategoryRouter } from "./Modules/Category/CategoryRouter.js";
 import { CountryRouter } from "./Modules/Country/CountryRouter.js";
+import { StateRouter } from "./Modules/State/StateRouter.js";
+import { FoodRouter } from "./Modules/Food/FoodRouter.js";
 export const App = (express) => {
   const app = express();
   app.use(cors())
@@ -19,6 +21,8 @@ export const App = (express) => {
   app.use("/user",userRouter)
   app.use('/category',CategoryRouter)
   app.use('/country',CountryRouter)
+  app.use('/state',StateRouter)
+  app.use('/food',FoodRouter)
   app.get("/", (req, res) => res.send("Hello World!"));
   app.use(ErrorHandeller)
   DbConnection();

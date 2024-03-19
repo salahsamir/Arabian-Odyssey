@@ -17,8 +17,22 @@ const schema = new Schema({
         type:Boolean,
         default:false
     },
+    desc: String,
+    ingredients:[{type:String}],
+    country:{
+        type: Schema.Types.ObjectId,
+        ref: "country"
+    },
+    user:{
+        type: Schema.Types.ObjectId,
+        ref:'user'
+    },
+    category:{
+        type: Schema.Types.ObjectId,
+        ref: "category"
+    },
     // wikipedia or other website for more information about the food
     url: String
 })
 
-export const foodCollection = model.food || model("food", schema);
+export const FoodCollection = model.food || model("food", schema);

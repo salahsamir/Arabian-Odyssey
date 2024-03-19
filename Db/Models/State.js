@@ -7,11 +7,23 @@ const schema = new Schema({
   },
   desc: {
     type: String,
-    required: true,
+
   },
-  attractions: {
+  image: {
+    path: {
+      type: String,
+    },
+    public_id: {
+      type: String,
+    }
+  },
+  country: {
     type: Schema.Types.ObjectId,
-    ref: "attraction"
+    ref: "country"
+  },
+  user:{
+    type: Schema.Types.ObjectId,
+    ref:'user'
   },
   isDeleted:{
     type:Boolean,
@@ -19,4 +31,4 @@ const schema = new Schema({
 }
 });
 
-export const stateCollection = model.state || model("state", schema);
+export const StateCollection = model.state || model("state", schema);

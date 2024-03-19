@@ -43,6 +43,22 @@ const schema = new Schema({
         ref:"user"
 
     }
+},{
+    timestamps:true,
+    toJSON:{virtuals:true},
+    toObject:{virtuals:true}
 })
+schema.virtual("states",{
+    ref:"state",
+    localField:"_id",
+    foreignField:"country"
+})
+
+schema.virtual("popularFood",{
+    ref:"food",
+    localField:"_id",
+    foreignField:"country"
+})
+
 
 export const CountryCollection = model.country || model("country", schema);

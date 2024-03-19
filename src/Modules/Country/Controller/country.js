@@ -44,6 +44,12 @@ export const GetAllCountry=AsyncHandeller(
                 path:"typesOfTourism",
                 select:"name image -_id"
                 
+            },{
+                path:"states",
+                select:"name image -_id"
+            },{
+                path:"popularFood",
+                select:"name image -_id"
             }
         ])
         return country?res.status(200).json({message:"success",length:country.length,country}):res.status(400).json({message:"country not found"})
