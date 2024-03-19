@@ -16,16 +16,9 @@ const schema=new Schema({
             type:String
         }
     },
-    user:{
-        type:Schema.Types.ObjectId,
-        ref:'user',
-        required:true
-    },
     isDeleted:{
         type:Boolean,
         default:false
     }
-},{
-    timestamps:true
 })
 export const CategoryCollection=model.category||model('category',schema)
