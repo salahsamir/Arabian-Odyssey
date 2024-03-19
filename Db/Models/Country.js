@@ -13,28 +13,36 @@ const schema = new Schema({
             type: String,
         },
     },
-    image: {
+    capital: String,
+    images:[ {
         path: {
             type: String,
         },
         public_id: {
             type: String,
         },
-    },
+    }],
     desc: String,
-    states: [{
-        type: Schema.Types.ObjectId,
-        ref: "state",
-        required: true
-    }],
-    food: [{
-       type: Schema.Types.ObjectId,
-       ref: "food" 
-    }],
+    typesOfTourism: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "category"
+
+
+        }
+    ],
+    numoftourist:String,
+    bestTimeToVisit:String,
+    languages:[{ type:String}],
     isDeleted:{
         type:Boolean,
         default:false
+    },
+    user:{
+        type:Schema.Types.ObjectId,
+        ref:"user"
+
     }
 })
 
-export const countryCollection = model.country || model("country", schema);
+export const CountryCollection = model.country || model("country", schema);
