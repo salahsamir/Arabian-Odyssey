@@ -1,57 +1,83 @@
 import { Schema, model } from "mongoose";
-const schema=new Schema({
-    name:{
-        type:String,
-        required:true
+const schema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
     },
-    email:{
-        type:String,
-        required:true,
-        unique:[true,'this email is already exist'],
-        index:true
+    attractionsAdded: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "attraction",
+      },
+    ],
+    email: {
+      type: String,
+      required: true,
+      unique: [true, "this email is already exist"],
+      index: true,
     },
-    password:{
-        type:String,
-        required:true
+    password: {
+      type: String,
+      required: true,
     },
-    location:String,
-    age:Number,
-    gender:{
-        type:String,
-        enum:['male','female'],
-        default:'male'
+    location: {
+      type: {
+        type: "String",
+        enum: ["Point"],
+        default: "Point",
+      },
+      cordinates: {
+        type: [Number],
+      },
     },
-    image:{
-        path:{
-            type:String
-        },
-        public_id:{
-            type:String
-        }
+    birth: {
+      day: Number,
+      month: Number,
+      year: Number,
     },
-    phone:{type:String},
-    status:{
-        type:String,
-        enum:['Online','Offline'],
-        default:'Online'
+    gender: {
+      type: String,
+      enum: ["male", "female"],
+      default: "male",
     },
-    isConfiremed:{
-        type:Boolean,
-        default:false
+    image: {
+      path: {
+        type: String,
+      },
+      public_id: {
+        type: String,
+      },
     },
-    isDeleted:{
-        type:Boolean,
-        default:false
+    phone: { type: String },
+    status: {
+      type: String,
+      enum: ["Online", "Offline"],
+      default: "Online",
     },
-    Role:{
-        type:String,
-        enum:['HR',"Admin","User"],
-        default:"User"
+    isConfiremed: {
+      type: Boolean,
+      default: false,
     },
-    reset:{
-        type:Number
-    }
-},{timestamps:true})
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
+    Role: {
+      type: String,
+      enum: ["HR", "Admin", "User"],
+      default: "User",
+    },
+    reset: {
+      type: Number,
+    },
+  },
+  { timestamps: true }
+);
 
+schema.virtual("age").get(function () {
+  const today = new Date();
+  return today.getFullYear() - this.birth.year;
+});
 
-export const UserCollection=model.user||model('user',schema)
+export const UserCollection = model.user || model("user", schema);
