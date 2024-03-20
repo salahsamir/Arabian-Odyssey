@@ -130,7 +130,7 @@ export const ConfiremEmail = AsyncHandeller(async (req, res, next) => {
   );
   return verify
   ///ToDo login page
-    ? res.redirect("http://localhost:3000/login")
+    ? res.redirect("https://abdalrhman-almarakeby.github.io/arabian-odyssey/#/signin")
     : res.status(400).json({ message: "user not verify" });
 });
 
@@ -278,5 +278,5 @@ export const updatePassword=AsyncHandeller(async(req,res,next)=>{
     const hash=Hash({value:password})
     const reset=Date.now()/1000
     const user=await UserCollection.findOneAndUpdate({email},{password:hash,reset},{new:true})
-    return res.status(200).json({message:"success",user})
+    return res.redirect("https://abdalrhman-almarakeby.github.io/arabian-odyssey/#/signin")
 })
