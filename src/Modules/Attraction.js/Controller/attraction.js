@@ -53,7 +53,7 @@ export const GetHomeAttraction=AsyncHandeller(
         const attraction=await AttractionCollection.find().populate([
             {
                 path:"country",
-                select:"name -id"
+                select:"name "
             }
         ]).select("name mainImage rating")
 
