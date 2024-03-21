@@ -1,56 +1,104 @@
 import { Schema, model } from "mongoose";
 
-const schema = new Schema({
-  name: {
-    type: String,
-    min: 3,
-    required: true,
-  },
-  author: {
-    type: Schema.Types.ObjectId,
-    ref: "user",
-    required: true
-  },
-  desc: String,
-  image: {
-    path: {
-        type: String,
+const attractionSchema = new Schema(
+  {
+    name: {
+      type: String,
+      min: 3,
+      required: true,
     },
-    public_id: {
-        type: String,
+    desc: {
+      type: String,
+      required: true,
     },
-  },
-  location: {
-    type: {
-        type: "String",
-        enum: ["Point"],
-        default: "Point",
+    mainImage:{
+      path: {
+        type: String,
       },
-      cordinates: {
-        type: [Number],
-      },
-  },
-  rating: {
-    type: Number,
-    default: 0,
-    required: true
-},
-raters: {
-    type: Number,
-    required: true,
-    default: 0,
-},
-category: [{
-    type: Schema.Types.ObjectId,
-    ref: "category",
-    required: true
-}],
-  isDeleted:{
-    type:Boolean,
-    default:false
-}
-}, {
-    timestamps: true
-});
+      public_id: {
+        type: String,
+      }
 
-export const attractionCollection = model.attraction || model("attraction", schema);
+    },
+    images: [
+      {
+        path: {
+          type: String,
+        },
+        public_id: {
+          type: String,
+        },
+      },
+    ],
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
+  
+ 
+    rating: {
+      type: Number,
+      default: 0,
+      required: true,
+    },
+    country: {
+      type: Schema.Types.ObjectId,
+      ref: "country",
+      required: true,
+    },
+    
+    category: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "category",
+        required: true,
+      },
+    ],
+    state: {
+      type: Schema.Types.ObjectId,
+      ref: "state",
+    },
+    openingHours: {
+      type: String,
+    },
+    contact: {
+      type: String,
+    },
+    admissionFees: {
+      type: String,
+    },
+    // reviews: [
+    //   {
+    //     user: {
+    //       type: Schema.Types.ObjectId,
+    //       ref: "user",
+    //       required: true,
+    //     },
+    //     rating: {
+    //       type: Number,
+    //       required: true,
+    //     },
+    //     comment: {
+    //       type: String,
+    //     },
+    //     createdAt: {
+    //       type: Date,
+    //       default: Date.now,
+    //     },
+    //   },
+    // ],
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+
+
+export const AttractionCollection =
+  model.attraction || model("attraction", attractionSchema);
