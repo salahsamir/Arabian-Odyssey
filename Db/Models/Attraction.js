@@ -11,7 +11,7 @@ const attractionSchema = new Schema(
       type: String,
       required: true,
     },
-    mainImage:{
+    image:{
       path: {
         type: String,
       },

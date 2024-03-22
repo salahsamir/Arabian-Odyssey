@@ -72,7 +72,7 @@ export const GetSpecificCountry=AsyncHandeller(
 export const GetHomeCountry=AsyncHandeller(
     async(req,res,next)=>{
         const country=await CountryCollection.find().select("name flag  numoftourist ")
-        return country?res.status(200).json({message:"success",country}):res.status(400).json({message:"country not found"})
+        return country?res.status(200).json({message:"success" ,length:country.length,country}):res.status(400).json({message:"country not found"})
     }
 )
 export const UpdateCountry=AsyncHandeller(
