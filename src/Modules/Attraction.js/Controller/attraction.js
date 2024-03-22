@@ -55,7 +55,7 @@ export const GetHomeAttraction=AsyncHandeller(
                 path:"country",
                 select:"name "
             }
-        ]).select("name image rating")
+        ]).select("name image rating").sort({rating:-1})
 
         return attraction?res.status(200).json({message:"success",length:attraction.length,attraction}):res.status(400).json({message:"attraction not found"})
     }
