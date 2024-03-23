@@ -28,7 +28,13 @@ export const GetAllCategory=AsyncHandeller(
 )
 export const GetSpecificCategory=AsyncHandeller(
     async(req,res,next)=>{
-        const category=await CategoryCollection.find({_id:req.params.id})
+        const category=await CategoryCollection.find({_id:req.params.id}).populate([
+            
+        {
+            path:"attractions",
+            select:"name image  desc"
+        }
+        ])
         return category?res.status(200).json({message:"success",length:category.length,category}):res.status(400).json({message:"category not found"})
     }
 )

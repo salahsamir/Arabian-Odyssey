@@ -59,6 +59,11 @@ schema.virtual("popularFood",{
     localField:"_id",
     foreignField:"country"
 })
+schema.virtual("attractions",{
+    ref:"attraction",
+    localField:"_id",
+    foreignField:"country"
+})
 
 
 export const CountryCollection = model.country || model("country", schema);

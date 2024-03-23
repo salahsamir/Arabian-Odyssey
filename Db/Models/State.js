@@ -29,6 +29,15 @@ const schema = new Schema({
     type:Boolean,
     default:false
 }
+},{
+  timestamps:true,
+  toJSON:{virtuals:true},
+  toObject:{virtuals:true}
 });
+schema.virtual("attractions",{
+  ref:"attraction",
+  localField:"_id",
+  foreignField:"state"
+})
 
 export const StateCollection = model.state || model("state", schema);

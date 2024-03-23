@@ -26,14 +26,17 @@ export const CreateState=AsyncHandeller(
 
 export const GetAllState=AsyncHandeller(
     async(req,res,next)=>{
-        const state=await StateCollection.find()
+        const state=await StateCollection.find().sort({name:1})
         return state?res.status(200).json({message:"success",length:state.length,state}):res.status(400).json({message:"state not found"})
     }
 )
 
 export const GetSpecificState=AsyncHandeller(
     async(req,res,next)=>{
-        const state=await StateCollection.findById(req.params.id)
+        const state=await StateCollection.findById(req.params.id).populate([{
+            path:"attractions",
+            select:"name image  desc"
+        }])
         return state?res.status(200).json({message:"success",state}):res.status(400).json({message:"state not found"})
     }
 )

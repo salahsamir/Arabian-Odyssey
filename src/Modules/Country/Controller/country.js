@@ -61,8 +61,18 @@ export const GetSpecificCountry=AsyncHandeller(
         const country=await CountryCollection.findById(req.params.id).populate([
             {
                 path:"typesOfTourism",
-                select:"name image -_id"
+                select:"name image "
                 
+            },{
+                path:"states",
+                select:"name image  desc"
+            },
+            {
+                path:"popularFood",
+                select:"name image  desc"
+            },{
+                path:"attractions",
+                select:"name image  desc" 
             }
         ])
         return country?res.status(200).json({message:"success",country}):res.status(400).json({message:"country not found"})
