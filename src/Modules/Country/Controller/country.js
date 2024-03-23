@@ -72,7 +72,7 @@ export const GetSpecificCountry=AsyncHandeller(
                 select:"name image  desc"
             },{
                 path:"attractions",
-                select:"name image  desc" 
+                select:"name image rating  desc" 
             }
         ])
         return country?res.status(200).json({message:"success",country}):res.status(400).json({message:"country not found"})

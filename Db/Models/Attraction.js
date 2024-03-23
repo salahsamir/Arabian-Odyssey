@@ -51,9 +51,9 @@ const attractionSchema = new Schema(
     category: [
       {
         type: Schema.Types.ObjectId,
-        ref: "category",
-        required: true,
+        ref: "category"
       },
+      
     ],
     state: {
       type: Schema.Types.ObjectId,

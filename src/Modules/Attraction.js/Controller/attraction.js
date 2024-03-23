@@ -9,17 +9,22 @@ export const AddAttraction=AsyncHandeller(
     async(req,res,next)=>{
         req.body.user=req.user._id
         const {state,country,category}=req.body
+        console.log(category);
         if(!state||!await StateCollection.findOne({_id:state,country})){
             return next(new Error("state not found",{cause:404}))
             
         }
-        if(category){
-            for (const ele of category) {
+        if(category) {
+            let categories = category; // Change const to let
+            if (!Array.isArray(categories)) {
+                // If category is a single string, convert it to an array with one element
+                categories = [categories];
+            }
+            
+            for (const ele of categories) {
                 if(!await CategoryCollection.findById(ele)){
                     return next(new Error("category not found",{cause:404}))
-                } 
-                 
-                
+                }
             } 
         }
         if(req.files.image){
