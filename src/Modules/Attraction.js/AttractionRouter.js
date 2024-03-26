@@ -7,6 +7,7 @@ export const AttractionRouter =Router()
 
 AttractionRouter.route('/')
 .get(Controller.GetAllAttraction)
+.get(Controller.SearchAttraction)
 .post(AuthMiddleware(Roles.admin),UploadImage().fields([{name:"images"},{name:"image"}]),Controller.AddAttraction)
 AttractionRouter.get('/home',Controller.GetHomeAttraction)
 AttractionRouter.route('/:id')

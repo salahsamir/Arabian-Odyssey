@@ -95,9 +95,15 @@ const attractionSchema = new Schema(
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
-
+attractionSchema.virtual('Review',{
+  ref:'review',
+  localField:'_id',
+  foreignField:'attraction'
+})
 
 
 export const AttractionCollection =

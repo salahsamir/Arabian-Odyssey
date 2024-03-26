@@ -7,9 +7,9 @@ const schema=new Schema({
         ref:"user",
         required:true
     },
-    product:{
+    attraction:{
         type:Schema.Types.ObjectId,
-        ref:"product",
+        ref:"attraction",
         required:true
     },
     rating:{

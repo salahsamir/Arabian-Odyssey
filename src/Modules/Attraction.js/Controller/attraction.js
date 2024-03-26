@@ -1,6 +1,7 @@
 import { AttractionCollection } from "../../../../Db/Models/Attraction.js";
 import { CategoryCollection } from "../../../../Db/Models/Category.js";
 import { StateCollection } from "../../../../Db/Models/State.js";
+import { ApiFeature } from "../../../Utils/ApiFeature.js";
 import Cloud from "../../../Utils/Cloud.js";
 import { AsyncHandeller } from "../../../Utils/ErrorHandling.js";
 
@@ -49,7 +50,28 @@ export const AddAttraction=AsyncHandeller(
 
 export const GetAllAttraction=AsyncHandeller(
     async(req,res,next)=>{
-        const attraction=await AttractionCollection.find()
+        const attraction=await AttractionCollection.find().populate([
+            {
+                path:"country",
+                select:"name "
+            },
+            {
+                path:"state",
+                select:"name"
+            },
+            {
+                path:"category",
+                select:"name "
+            },{
+                path:"Review",
+                select:"rating user comment",
+                populate:{
+                    path:"user",
+                    select:"name image"
+                }
+
+            }
+        ])
         return attraction?res.status(200).json({message:"success",length:attraction.length,attraction}):res.status(400).json({message:"attraction not found"})
     }
 )
@@ -67,11 +89,31 @@ export const GetHomeAttraction=AsyncHandeller(
 )
 export const GetSpecificAttraction=AsyncHandeller(
     async(req,res,next)=>{
-        const attraction=await AttractionCollection.findById(req.params.id)
+        const attraction=await AttractionCollection.findById(req.params.id).populate([
+            {
+                path:"country",
+                select:"name "
+            },
+            {
+                path:"state",
+                select:"name"
+            },
+            {
+                path:"category",
+                select:"name "
+            },{
+                path:"Review",
+                select:"rating user comment",
+                populate:{
+                    path:"user",
+                    select:"name image"
+                }
+
+            }
+        ])
         return attraction?res.status(200).json({message:"success",attraction}):res.status(400).json({message:"attraction not found"})
     }
 )
-
 export const UpdateAttraction=AsyncHandeller(
     async(req,res,next)=>{
         const {name}=req.body
@@ -99,5 +141,14 @@ export const UpdateAttraction=AsyncHandeller(
         }
         const updatedAttraction=await AttractionCollection.findByIdAndUpdate(req.params.id,req.body,{new:true})
         return updatedAttraction?res.status(200).json({message:"success",updatedAttraction}):res.status(400).json({message:"attraction not updated"})
+    }
+)
+
+
+export const SearchAttraction=AsyncHandeller(
+    async(req,res,next)=>{
+        let query=new ApiFeature(AttractionCollection.find().populate([{path:"country",select:"name"}]),req.query).Search()
+        const attraction = await query
+        return attraction?res.status(200).json({message:"success",length:attraction.length,attraction}):res.status(400).json({message:"attraction not found"})
     }
 )
