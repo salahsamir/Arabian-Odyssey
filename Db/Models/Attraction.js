@@ -11,14 +11,13 @@ const attractionSchema = new Schema(
       type: String,
       required: true,
     },
-    image:{
+    image: {
       path: {
         type: String,
       },
       public_id: {
         type: String,
-      }
-
+      },
     },
     images: [
       {
@@ -35,8 +34,12 @@ const attractionSchema = new Schema(
       ref: "user",
       required: true,
     },
-  
- 
+    locationCoordinates: [
+      {
+        type: Number,
+      },
+    ],
+
     rating: {
       type: Number,
       default: 0,
@@ -47,13 +50,12 @@ const attractionSchema = new Schema(
       ref: "country",
       required: true,
     },
-    
+
     category: [
       {
         type: Schema.Types.ObjectId,
-        ref: "category"
+        ref: "category",
       },
-      
     ],
     state: {
       type: Schema.Types.ObjectId,
@@ -68,6 +70,7 @@ const attractionSchema = new Schema(
     admissionFees: {
       type: String,
     },
+   
     // reviews: [
     //   {
     //     user: {
@@ -99,12 +102,11 @@ const attractionSchema = new Schema(
     toObject: { virtuals: true },
   }
 );
-attractionSchema.virtual('Review',{
-  ref:'review',
-  localField:'_id',
-  foreignField:'attraction'
-})
-
+attractionSchema.virtual("Review", {
+  ref: "review",
+  localField: "_id",
+  foreignField: "attraction",
+});
 
 export const AttractionCollection =
   model.attraction || model("attraction", attractionSchema);

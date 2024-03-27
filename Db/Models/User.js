@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { Schema, model } from "mongoose";
 const schema = new Schema(
   {
@@ -5,12 +6,7 @@ const schema = new Schema(
       type: String,
       required: true,
     },
-    attractionsAdded: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "attraction",
-      },
-    ],
+
     email: {
       type: String,
       required: true,
@@ -71,6 +67,13 @@ const schema = new Schema(
     reset: {
       type: Number,
     },
+    WishList: [
+      {
+        type:Types.ObjectId,
+        ref: "attraction",
+
+      }
+    ]
   },
   { timestamps: true }
 );

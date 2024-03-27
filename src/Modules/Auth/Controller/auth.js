@@ -65,7 +65,7 @@ export const SignUp = AsyncHandeller(async (req, res, next) => {
     </tr>
     <tr>
     <td>
-    <h1>Email Confirmation</h1>
+    
     <p>Please click the button below to confirm your email address:</p>
     <a class="button"  href=${link}>Confirm Email</a>
     </td>

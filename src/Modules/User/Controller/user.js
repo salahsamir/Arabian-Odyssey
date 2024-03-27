@@ -1,3 +1,4 @@
+import { AttractionCollection } from "../../../../Db/Models/Attraction.js";
 import { UserCollection } from "../../../../Db/Models/User.js";
 import { Compare, Hash } from "../../../Utils/Bcrypt.js";
 import Cloud from "../../../Utils/Cloud.js";
@@ -69,3 +70,32 @@ export const DeleteUser=AsyncHandeller(
         return deleteuser?res.status(200).json({message:"success",deleteuser}):res.status(400).json({message:"user not deleted"})
     }
 )
+
+export const AddWishlist = AsyncHandeller((async (req, res, next) => {
+    const attraction = await AttractionCollection.findById(req.params.id);
+    if (!attraction) {
+        return next(new Error("Attraction not found", { cause: 404 }));
+    }
+     
+   const user=await UserCollection.findByIdAndUpdate(req.user._id, { $addToSet: { WishList: attraction._id } }, { new: true });
+    return user ? res.status(200).json({ message: "success", user }) : res.status(400).json({ message: "user not updated" });
+}));
+
+export const GetWishlist=AsyncHandeller(
+    async(req,res,next)=>{
+        const user=await UserCollection.findById(req.user._id).select("WishList").populate([
+            {
+                path:"WishList",
+                select:"image name"
+            }
+        ])
+        return user?res.status(200).json({message:"success",length:user.WishList.length,user}):res.status(400).json({message:"user not updated"})
+    }
+)
+
+export const DeleteWishlist = AsyncHandeller((async (req, res, next) => {
+    
+    const {id}=req.params
+    const user=await UserCollection.findByIdAndUpdate(req.user._id, { $pull: { WishList: id } }, { new: true });
+    return user ? res.status(200).json({ message: "success", user }) : res.status(400).json({ message: "user not updated" });
+}) );

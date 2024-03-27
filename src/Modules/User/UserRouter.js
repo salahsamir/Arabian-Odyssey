@@ -18,5 +18,7 @@ userRouter.route('/')
 
 userRouter.patch('/image',AuthMiddleware(Roles.user),UploadImage().single('image'),Controller.UploadImage)
 userRouter.patch('/password',AuthMiddleware(Roles.user),ValidationMiddleware(Validation.UpdatePassword),Controller.UpdatePassword)
-// userRouter.patch('/image',Auth(Roles.user),UploadImage().single('image'),usercotroller.UpdateImage)
-// userRouter.put('/',Auth(Roles.user),usercotroller.UpdateUser)
+
+userRouter.post('/wishlist/:id',AuthMiddleware(Roles.user),Controller.AddWishlist)
+userRouter.get('/wishlist',AuthMiddleware(Roles.user),Controller.GetWishlist)
+userRouter.patch('/wishlist/:id',AuthMiddleware(Roles.user),Controller.DeleteWishlist)
