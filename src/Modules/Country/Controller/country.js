@@ -42,14 +42,14 @@ export const GetAllCountry=AsyncHandeller(
         const country=await CountryCollection.find().populate([
             {
                 path:"typesOfTourism",
-                select:"name image -_id"
+                select:"name image "
                 
             },{
                 path:"states",
-                select:"name image -_id"
+                select:"name image"
             },{
                 path:"popularFood",
-                select:"name image -_id"
+                select:"name image"
             }
         ])
         return country?res.status(200).json({message:"success",length:country.length,country}):res.status(400).json({message:"country not found"})

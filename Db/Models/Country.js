@@ -14,7 +14,7 @@ const schema = new Schema({
         },
     },
     capital: String,
-    images:[ {
+    images: [{
         path: {
             type: String,
         },
@@ -23,47 +23,45 @@ const schema = new Schema({
         },
     }],
     desc: String,
-    typesOfTourism: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "category"
-
-
-        }
-    ],
-    numoftourist:String,
-    bestTimeToVisit:String,
-    languages:[{ type:String}],
-    isDeleted:{
-        type:Boolean,
-        default:false
+    typesOfTourism: [{
+        type: Schema.Types.ObjectId,
+        ref: "category"
+    }],
+    numoftourist: String,
+    bestTimeToVisit: String,
+    languages: [{
+        type: String
+    }],
+    isDeleted: {
+        type: Boolean,
+        default: false
     },
-    user:{
-        type:Schema.Types.ObjectId,
-        ref:"user"
-
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "user"
     }
-},{
-    timestamps:true,
-    toJSON:{virtuals:true},
-    toObject:{virtuals:true}
-})
-schema.virtual("states",{
-    ref:"state",
-    localField:"_id",
-    foreignField:"country"
-})
+}, {
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
+});
 
-schema.virtual("popularFood",{
-    ref:"food",
-    localField:"_id",
-    foreignField:"country"
-})
-schema.virtual("attractions",{
-    ref:"attraction",
-    localField:"_id",
-    foreignField:"country"
-})
+schema.virtual("states", {
+    ref: "state",
+    localField: "_id",
+    foreignField: "country" // This should be the field in the "state" schema that references the country
+});
 
+schema.virtual("popularFood", {
+    ref: "food",
+    localField: "_id",
+    foreignField: "country" // This should be the field in the "food" schema that references the country
+});
+
+schema.virtual("attractions", {
+    ref: "attraction",
+    localField: "_id",
+    foreignField: "country" // This should be the field in the "attraction" schema that references the country
+});
 
 export const CountryCollection = model.country || model("country", schema);
