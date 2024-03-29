@@ -5,7 +5,7 @@ import { UploadImage } from "../../Utils/Multer.js";
 
 export const CountryRouter = Router();
 
-CountryRouter.route('/').get(Controller.GetAllCountry).post(AuthMiddleware(Roles.admin), UploadImage().fields([{ name: 'images' }, { name: 'flag' }]), Controller.CreateCountry);
+CountryRouter.route('/').get(Controller.GetAllCountry).post(AuthMiddleware(Roles.user), UploadImage().fields([{ name: 'images' }, { name: 'flag' }]), Controller.CreateCountry);
 CountryRouter.get('/home',Controller.GetHomeCountry)
 
-CountryRouter.route('/:id').get(Controller.GetSpecificCountry).put(AuthMiddleware(Roles.admin), UploadImage().fields([{ name: 'images' }, { name: 'flag' }]), Controller.UpdateCountry)
+CountryRouter.route('/:id').get(Controller.GetSpecificCountry).put(AuthMiddleware(Roles.user), UploadImage().fields([{ name: 'images' }, { name: 'flag' }]), Controller.UpdateCountry)

@@ -8,10 +8,10 @@ export const AttractionRouter =Router()
 AttractionRouter.route('/')
 .get(Controller.GetAllAttraction)
 .get(Controller.SearchAttraction)
-.post(AuthMiddleware(Roles.admin),UploadImage().fields([{name:"images"},{name:"image"}]),Controller.AddAttraction)
+.post(AuthMiddleware(Roles.user),UploadImage().fields([{name:"images"},{name:"image"}]),Controller.AddAttraction)
 
 
 AttractionRouter.get('/home',Controller.GetHomeAttraction)
 AttractionRouter.route('/:id')
 .get(Controller.GetSpecificAttraction)
-.put(AuthMiddleware(Roles.admin),UploadImage().fields([{name:"images"},{name:"image"}]),Controller.UpdateAttraction)
+.put(AuthMiddleware(Roles.user),UploadImage().fields([{name:"images"},{name:"image"}]),Controller.UpdateAttraction)

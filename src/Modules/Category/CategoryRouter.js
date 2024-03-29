@@ -6,15 +6,15 @@ export const CategoryRouter = Router();
 CategoryRouter.route("/")
   .get(Controller.GetAllCategory)
   .post(
-    AuthMiddleware(Roles.admin),
+    AuthMiddleware(Roles.user),
     UploadImage().single("image"),
     Controller.CreateCategory
   );
 CategoryRouter.route("/:id")
   .get(Controller.GetSpecificCategory)
   .put(
-    AuthMiddleware(Roles.admin),
+    AuthMiddleware(Roles.user),
     UploadImage().single("image"),
     Controller.UpdateCategory
   )
-CategoryRouter.delete('/:id',AuthMiddleware(Roles.admin),Controller.DeletedCategory)
+CategoryRouter.delete('/:id',AuthMiddleware(Roles.user),Controller.DeletedCategory)

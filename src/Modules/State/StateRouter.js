@@ -6,5 +6,5 @@ import { UploadImage } from "../../Utils/Multer.js";
 export const StateRouter=Router()
 
 StateRouter.route('/').get(Controller.GetAllState)
-           .post(AuthMiddleware(Roles.admin),UploadImage().single('image'),Controller.CreateState)
-StateRouter.route('/:id').get(Controller.GetSpecificState).put(AuthMiddleware(Roles.admin),UploadImage().single('image'),Controller.UpdateState)
+           .post(AuthMiddleware(Roles.user),UploadImage().single('image'),Controller.CreateState)
+StateRouter.route('/:id').get(Controller.GetSpecificState).put(AuthMiddleware(Roles.user),UploadImage().single('image'),Controller.UpdateState)

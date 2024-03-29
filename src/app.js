@@ -12,8 +12,13 @@ import { AttractionRouter } from "./Modules/Attraction.js/AttractionRouter.js";
 import { ReviewRouter } from "./Modules/Review/ReviewRouter.js";
 export const App = (express) => {
   const app = express();
-  app.use(cors())
   app.use(express.json());
+  app.use(cors())
+  app.use(function (request, response, next) {
+    response.header("Access-Control-Allow-Origin", "*");
+    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
   const port = process.env.PORT;
   if (process.env.mood == "dev") {
     app.use(morgan("dev"));
