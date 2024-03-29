@@ -75,12 +75,21 @@ const schema = new Schema(
       }
     ]
   },
-  { timestamps: true }
+  { timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true } }
 );
 
 schema.virtual("age").get(function () {
   const today = new Date();
   return today.getFullYear() - this.birth.year;
 });
+schema.virtual("Review", {
+  ref: "review",
+  localField: "_id",
+  foreignField: "user",
+});
+
+
 
 export const UserCollection = model.user || model("user", schema);

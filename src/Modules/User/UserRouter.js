@@ -9,11 +9,13 @@ import { ValidationMiddleware } from "../../Middleware/Validtions.js";
 export const userRouter=Router()
 
 //Route
+
 userRouter.route('/')
-         .get(AuthMiddleware(Roles.user),Controller.GetUser)
+        .get(AuthMiddleware(Roles.user),Controller.GetUser)
          .put(AuthMiddleware(Roles.user),Controller.UpdateUser)
          .delete(AuthMiddleware(Roles.user),Controller.DeleteUser)
          .patch(AuthMiddleware(Roles.user),Controller.Logout)
+
 
 
 userRouter.patch('/image',AuthMiddleware(Roles.user),UploadImage().single('image'),Controller.UploadImage)

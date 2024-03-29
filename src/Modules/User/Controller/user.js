@@ -7,9 +7,16 @@ import { AsyncHandeller } from "../../../Utils/ErrorHandling.js";
 
 export const GetUser=AsyncHandeller(
     async(req,res,next)=>{
-        const user=req.user;
+        
+        const user=await UserCollection.findById(req.user._id).populate([
+            {
+                path:"WishList",
+                select:"image name rating"
+            }
+        ])
         return user? res.status(200).json({message:"success",user}):next(new Error("user not found",{cause:404}))
     }
+    
 )
 export const UpdateUser=AsyncHandeller(
     async(req,res,next)=>{
